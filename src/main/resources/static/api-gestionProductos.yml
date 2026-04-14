@@ -1,0 +1,179 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://localhost:8080/api'
+info:
+  description: >-
+    API para gestionar un catálogo de productos.
+  version: 1.0.0
+  title: OpenAPI Gestión Productos
+  license:
+tags:
+  - name: product
+    description: Operaciones sobre productos
+paths:
+  /productos:
+    get:
+      tags:
+        - product
+      summary: Trae la lista de productos
+      description:
+      operationId: listarProductos
+      parameters:
+        - in: query
+          name: nombre
+          schema:
+            type: string
+          description: Nombre del producto
+          required: false
+        - in: query
+          name: categoria
+          schema:
+            type: string
+          description: Categoría a la que pertenece el producto
+          required: false
+      responses:
+        '200':
+          description: operación exitosa
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+    post:
+      tags:
+        - product
+      summary: Añade un nuevo producto al catálogo
+      description: ''
+      operationId: crearProducto
+      responses:
+        '201':
+          description: producto creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '405':
+          description: input no válido
+      requestBody:
+        $ref: '#/components/requestBodies/Product'
+  /productos/{id}:
+    get:
+      tags:
+        - product
+      summary: Trae un producto por su ID
+      description:
+      operationId: detalleProducto
+      parameters:
+        - name: id
+          in: path
+          description: ID de producto a traer
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: Id no válido
+        '404':
+          description: Producto no encontrado
+    put:
+      tags:
+        - product
+      summary: Actualizar un producto existente
+      description: ''
+      operationId: modificarProducto
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: producto modificado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: Id no válido
+        '404':
+          description: Producto no encontrado
+        '405':
+          description: input no válido
+      requestBody:
+        $ref: '#/components/requestBodies/Product'
+    delete:
+      tags:
+        - product
+      summary: Eliminar un producto
+      description: ''
+      operationId: eliminarProducto
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: producto eliminado
+        '400':
+          description: Id no válido
+        '404':
+          description: Producto no encontrado
+components:
+  requestBodies:
+    Product:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Product'
+      description: Objeto ProductoDTO
+      required: true
+  schemas:
+    Product:
+      title: ProductoDTO
+      description: Producto del catálogo
+      type: object
+      properties:
+        nombre:
+          type: string
+          maxLength: 100
+        descripcion:
+          type: string
+          maxLength: 255
+        precio:
+          type: number
+          format: double
+        categoria:
+          type: string
+          maxLength: 50
+        marca:
+          type: string
+          maxLength: 50
+        referencia:
+          type: string
+          maxLength: 50
+        activo:
+          type: boolean
+        audUser:
+          type: string
+      required:
+        - nombre
+        - precio
+        - categoria
+        - referencia
+        - activo
+            
+          
+          
