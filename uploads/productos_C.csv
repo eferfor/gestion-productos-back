@@ -1,0 +1,3 @@
+id;nombre;descripcion;precio;categoria;marca;referencia;activo;audUser
+51;Lápiz;Lápiz bonito;3;PAPELERIA;Blackwing;PAP02;true;Lara
+52;Mancuerna 10kg;Mancuerna hexagonal de 10kg;100;DEPORTE;Domyos;DOM01;true;Alex

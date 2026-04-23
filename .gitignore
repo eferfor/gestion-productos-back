@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+### Tests ###
+src/test/java/com/productos/
+src/main/java/com/productos/service/StringProcessorService.java
+src/main/java/com/productos/service/DiscountService.java

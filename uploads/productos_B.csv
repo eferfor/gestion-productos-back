@@ -1,0 +1,4 @@
+id;nombre;descripcion;precio;categoria;marca;referencia;activo;audUser
+;Libreta;Libreta Oxford cuadriculada;7;PAPELERIA;Oxford;PAP01;true;Rubén
+;Lápiz 6B;Lápiz con goma de borrar;3;PAPELERIA;Blackwing;PAP02;true;Lara
+;Mancuerna 5kg;Mancuerna hexagonal de 5kg;10;DEPORTE;Domyos;DOM01;true;Alex
