@@ -58,4 +58,6 @@ public class Product {
 	@JsonProperty("aud_user")
 	private String audUser;
 	
+	private String imagen;
+	
 }

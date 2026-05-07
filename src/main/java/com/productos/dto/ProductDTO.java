@@ -55,4 +55,5 @@ public class ProductDTO {
 	@JsonProperty("aud_user")
 	private String audUser;
 	
+	private String imagen;
 }

@@ -56,7 +56,7 @@ public class POIController {
 			
 			// Cabecera
 			Object[] cabecera = {"ID", "Nombre", "Descripción", "Precio", "Categoría",
-					"Marca", "Referencia", "Activo", "Fecha alta", "Usuario"};
+					"Marca", "Referencia", "Activo", "Fecha alta", "Usuario", "Imagen"};
 			writeRow(sheet, rownum++, cabecera, helper);
 			
 			// Iterar mapa y añadirlo a la hoja
@@ -108,7 +108,8 @@ public class POIController {
 				p.getReferencia(),
 				p.getActivo(),
 				p.getFechaAlta(),
-				p.getAudUser()
+				p.getAudUser(),
+				p.getImagen()
 		};
 	}
 	

@@ -168,6 +168,8 @@ components:
           type: boolean
         audUser:
           type: string
+        imagen:
+          type: string
       required:
         - nombre
         - precio

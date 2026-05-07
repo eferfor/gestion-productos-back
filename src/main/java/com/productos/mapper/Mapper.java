@@ -22,6 +22,7 @@ public class Mapper {
 				.activo(p.getActivo())
 				.fechaAlta(p.getFechaAlta())
 				.audUser(p.getAudUser())
+				.imagen(p.getImagen())
 				.build();
 		
 	}

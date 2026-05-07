@@ -46,7 +46,7 @@ public class ProductsItemReader {
 		DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
 		
 		lineTokenizer.setDelimiter(";");
-		lineTokenizer.setNames("id", "nombre", "descripcion", "precio", "categoria", "marca", "referencia", "activo", "audUser");
+		lineTokenizer.setNames("id", "nombre", "descripcion", "precio", "categoria", "marca", "referencia", "activo", "audUser", "imagen");
 		
 		BeanWrapperFieldSetMapper<ProductDTO> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
 		fieldSetMapper.setTargetType(ProductDTO.class);

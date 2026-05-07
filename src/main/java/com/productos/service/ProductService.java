@@ -61,6 +61,7 @@ public class ProductService implements IProductService {
 				.activo(p.getActivo())
 				.fechaAlta(p.getFechaAlta())
 				.audUser(p.getAudUser())
+				.imagen(p.getImagen())
 				.build();
 		
 		return Mapper.toDTO(repo.save(prod));
@@ -79,6 +80,7 @@ public class ProductService implements IProductService {
 		prod.setActivo(p.getActivo());
 		prod.setFechaAlta(p.getFechaAlta());
 		prod.setAudUser(p.getAudUser());
+		prod.setImagen(p.getImagen());
 		
 		return Mapper.toDTO(repo.save(prod));
 	}
