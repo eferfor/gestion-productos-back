@@ -1,0 +1,68 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, sans-serif;
+    padding: 1rem;
+    color: #1d1818;
+}
+
+h1{
+    margin-bottom: 2rem;
+}
+
+table{
+    border-radius: 1rem;
+    padding: 1.5rem;
+    border: 2px solid #F0A34C;
+    height: 10rem;
+    border-spacing: 1rem .5rem;
+    width: 100%;
+    margin: 0 auto 2rem;
+    
+    page-break-inside: avoid; 
+}
+
+.producto .imagen{
+    width: 14rem;
+}
+
+.producto img{
+    width: 14rem;
+    height: auto;
+}
+
+.producto h2{
+    font-weight: 600;
+}
+
+.producto h3{
+   font-weight: normal;
+}
+
+.producto h3 span{
+    font-size: 0.8rem;
+    color: #1d1818;
+}
+
+.producto .datos{
+    margin-top: auto;
+    font-size: 0.9rem;
+}
+
+.producto .datos p.precio{
+    font-weight: bold;
+    padding: .2rem 0;
+}
+
+.producto .categoria p{
+    font-size: .7rem;
+    border: 1px solid #1d1818;
+    padding: 0.3rem .4rem;
+    margin: .2rem 0;
+    width: 10rem;
+    text-align: center;
+}

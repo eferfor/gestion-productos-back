@@ -3,7 +3,7 @@ package com.productos.mapper;
 import com.productos.dto.ProductDTO;
 import com.productos.model.Product;
 
-public class Mapper {
+public class ProductMapper {
 
 	public static ProductDTO toDTO(Product p) {
 		

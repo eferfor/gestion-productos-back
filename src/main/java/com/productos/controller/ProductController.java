@@ -34,6 +34,11 @@ public class ProductController {
 		return ResponseEntity.ok(service.listarProductos(nombre, categoria));
 	}
 	
+	@GetMapping("/activos")
+	public ResponseEntity<List<ProductDTO>> listarProductosActivos(){
+		return ResponseEntity.ok(service.listarProductosActivos());
+	}
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<ProductDTO> detalleProducto(@PathVariable Long id){
 		return ResponseEntity.ok(service.detalleProducto(id));

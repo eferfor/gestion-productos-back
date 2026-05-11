@@ -8,6 +8,8 @@ import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.net.ssl.SSLEngineResult.Status;
+
 import org.springframework.batch.core.job.Job;
 import org.springframework.batch.core.job.JobExecution;
 import org.springframework.batch.core.job.parameters.JobParameters;
@@ -18,6 +20,7 @@ import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,11 +38,16 @@ public class BatchController {
 	private final JobOperator jobOperator;
 	private final JobRepository jobRepository;
 	private final Job agregarProductosJob;
+	private final Job enviarPdfJob;
 	
-	public BatchController(@Qualifier("customJobOperator") JobOperator jobOperator, JobRepository jobRepository, Job agregarProductosJob) {
+	public BatchController(@Qualifier("customJobOperator") JobOperator jobOperator,
+			JobRepository jobRepository,
+			@Qualifier("agregarProductosJob") Job agregarProductosJob,
+			@Qualifier("enviarPdfJob") Job enviarPdfJob) {
 		this.jobOperator = jobOperator;
 		this.jobRepository = jobRepository;
 		this.agregarProductosJob = agregarProductosJob;
+		this.enviarPdfJob = enviarPdfJob;
 	}
 	
 	@PostMapping("/uploadFile")
@@ -64,7 +72,7 @@ public class BatchController {
 			
 			JobParameters jobParameters = new JobParametersBuilder()
 					.addString("filePath", storedPath.toAbsolutePath().toString())
-					.addLong("run.id ", System.currentTimeMillis())
+					.addLong("run.id", System.currentTimeMillis())
 					.toJobParameters();
 			
 			
@@ -80,6 +88,23 @@ public class BatchController {
 			
 		}catch (Exception e) {
 			log.error("Error al iniciar el batch, Error {}", e.getMessage());
+			throw new RuntimeException();
+		}
+	}
+	
+	@GetMapping("/enviarCatalogo")
+	public ResponseEntity<String> enviarCatalogo(){
+		try {
+			JobParameters jobParameters = new JobParametersBuilder()
+					.addLong("run.id", System.currentTimeMillis())
+					.toJobParameters();
+			
+			JobExecution execution = jobOperator.run(enviarPdfJob, jobParameters);
+			
+			return ResponseEntity.ok("Petición iniciada.");
+			
+		}catch (Exception e) {
+			log.error("Error al enviar los catálogos {}", e.getMessage());
 			throw new RuntimeException();
 		}
 	}

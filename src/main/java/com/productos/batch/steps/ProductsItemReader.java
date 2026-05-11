@@ -1,6 +1,5 @@
 package com.productos.batch.steps;
 
-import java.io.File;
 import java.nio.charset.StandardCharsets;
 
 import org.springframework.batch.core.configuration.annotation.StepScope;
@@ -13,11 +12,9 @@ import org.springframework.batch.infrastructure.item.file.transform.DelimitedLin
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 
 import com.productos.dto.ProductDTO;
-import com.productos.model.Product;
 
 import lombok.extern.slf4j.Slf4j;
 

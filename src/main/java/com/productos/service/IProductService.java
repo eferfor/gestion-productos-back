@@ -8,6 +8,7 @@ import com.productos.model.Product;
 public interface IProductService {
 
 	List<ProductDTO> listarProductos();
+	List<ProductDTO> listarProductosActivos();
 	List<ProductDTO> listarProductos(String nombre, String categoria);
 	ProductDTO detalleProducto(Long id);
 	ProductDTO crearProducto(ProductDTO p);

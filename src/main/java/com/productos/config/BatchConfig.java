@@ -69,7 +69,7 @@ public class BatchConfig {
 				.build();
 	}
 	
-	@Bean
+	@Bean(name = "agregarProductosJob")
 	public Job job(JobRepository jobRepository, Step readFile) {
 		return new JobBuilder("agregarProductos", jobRepository)
 				.incrementer(new RunIdIncrementer())

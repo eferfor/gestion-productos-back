@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.productos.dto.ProductDTO;
 import com.productos.exception.NotFoundException;
-import com.productos.mapper.Mapper;
+import com.productos.mapper.ProductMapper;
 import com.productos.model.Product;
 import com.productos.repository.ProductRepository;
 
@@ -19,7 +19,7 @@ public class ProductService implements IProductService {
 	
 	@Override
 	public List<ProductDTO> listarProductos(){
-		return repo.findAll().stream().map(Mapper::toDTO).toList();
+		return repo.findAll().stream().map(ProductMapper::toDTO).toList();
 	}
 	
 	@Override
@@ -39,14 +39,20 @@ public class ProductService implements IProductService {
 			productos = repo.findAll();
 		}
 		
-		return productos.stream().map(Mapper::toDTO).toList();
-		
+		return productos.stream().map(ProductMapper::toDTO).toList();	
+	}
+	
+	@Override
+	public List<ProductDTO> listarProductosActivos(){
+		List<Product> productos;
+		productos = repo.findByActivoTrue();
+		return productos.stream().map(ProductMapper::toDTO).toList();
 	}
 
 	@Override
 	public ProductDTO detalleProducto(Long id) {
 		Product p = repo.findById(id).orElseThrow(() -> new NotFoundException("No se ha encontrado el producto"));
-		return Mapper.toDTO(p);
+		return ProductMapper.toDTO(p);
 	}
 
 	@Override
@@ -64,7 +70,7 @@ public class ProductService implements IProductService {
 				.imagen(p.getImagen())
 				.build();
 		
-		return Mapper.toDTO(repo.save(prod));
+		return ProductMapper.toDTO(repo.save(prod));
 	}
 
 	@Override
@@ -82,7 +88,7 @@ public class ProductService implements IProductService {
 		prod.setAudUser(p.getAudUser());
 		prod.setImagen(p.getImagen());
 		
-		return Mapper.toDTO(repo.save(prod));
+		return ProductMapper.toDTO(repo.save(prod));
 	}
 
 	@Override
