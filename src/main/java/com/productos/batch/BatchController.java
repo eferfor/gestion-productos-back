@@ -101,7 +101,7 @@ public class BatchController {
 			
 			JobExecution execution = jobOperator.run(enviarPdfJob, jobParameters);
 			
-			return ResponseEntity.ok("Petición iniciada.");
+			return ResponseEntity.ok("Catálogo enviado.");
 			
 		}catch (Exception e) {
 			log.error("Error al enviar los catálogos {}", e.getMessage());

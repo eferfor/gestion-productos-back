@@ -1,5 +1,7 @@
 package com.productos.catalogo;
 
-public record PdfEnvioResultado (Long userId, String email, boolean ok, String rutaPdf, String error){
+import java.util.Map;
+
+public record PdfEnvioResultado (Long userId, String email, boolean emailValid, boolean ok, String rutaPdf, String error){
 
 }

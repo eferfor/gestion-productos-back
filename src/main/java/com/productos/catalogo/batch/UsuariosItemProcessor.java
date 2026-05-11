@@ -7,6 +7,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.jspecify.annotations.Nullable;
 import org.springframework.batch.core.configuration.annotation.StepScope;
@@ -23,6 +24,7 @@ import com.productos.catalogo.PdfEnvioResultado;
 import com.productos.catalogo.PdfGenerateService;
 import com.productos.dto.ProductDTO;
 import com.productos.model.Usuario;
+import com.productos.service.EmailService;
 import com.productos.service.ProductService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -38,10 +40,12 @@ public class UsuariosItemProcessor implements ItemProcessor<Usuario, PdfEnvioRes
 	
 	private final PdfGenerateService pdfGenerateService;
 	private final ProductService productService;
+	private final EmailService emailService;
 	
-	public UsuariosItemProcessor(PdfGenerateService pdfGenerateService, ProductService productService) {
+	public UsuariosItemProcessor(PdfGenerateService pdfGenerateService, ProductService productService, EmailService emailService) {
 		this.pdfGenerateService = pdfGenerateService;
 		this.productService = productService;
+		this.emailService = emailService;
 	}
 	
 	@Override
@@ -77,7 +81,19 @@ public class UsuariosItemProcessor implements ItemProcessor<Usuario, PdfEnvioRes
 			}
 		}
 		
-		return new PdfEnvioResultado(usuario.getId(), usuario.getEmail(), true, destino.toString(), null);
+		boolean emailValid = true;
+		
+		if(!isValidEmailAddress(usuario.getEmail())) {
+			emailValid = false;
+		}
+			
+		return new PdfEnvioResultado(usuario.getId(), usuario.getEmail(), emailValid, true, destino.toString(), null);
+	}
+	
+	public static boolean isValidEmailAddress(String email) {
+		return Pattern.compile("^(.+)@(\\S+)$")
+				.matcher(email)
+				.matches();
 	}
 	
 }
