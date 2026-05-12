@@ -39,15 +39,18 @@ public class BatchController {
 	private final JobRepository jobRepository;
 	private final Job agregarProductosJob;
 	private final Job enviarPdfJob;
+	private final Job enviarEmailsJob;
 	
 	public BatchController(@Qualifier("customJobOperator") JobOperator jobOperator,
 			JobRepository jobRepository,
 			@Qualifier("agregarProductosJob") Job agregarProductosJob,
-			@Qualifier("enviarPdfJob") Job enviarPdfJob) {
+			@Qualifier("enviarPdfJob") Job enviarPdfJob,
+			@Qualifier("enviarEmailsJob") Job enviarEmailsJob) {
 		this.jobOperator = jobOperator;
 		this.jobRepository = jobRepository;
 		this.agregarProductosJob = agregarProductosJob;
 		this.enviarPdfJob = enviarPdfJob;
+		this.enviarEmailsJob = enviarEmailsJob;
 	}
 	
 	@PostMapping("/uploadFile")
@@ -105,6 +108,23 @@ public class BatchController {
 			
 		}catch (Exception e) {
 			log.error("Error al enviar los catálogos {}", e.getMessage());
+			throw new RuntimeException();
+		}
+	}
+	
+	@GetMapping("/enviarEmails")
+	public ResponseEntity<String> enviarEmails(){
+		try {
+			JobParameters jobParameters = new JobParametersBuilder()
+					.addLong("run.id", System.currentTimeMillis())
+					.toJobParameters();
+			
+			JobExecution execution = jobOperator.run(enviarEmailsJob, jobParameters);
+			
+			return ResponseEntity.ok("Emails enviados.");
+			
+		}catch (Exception e) {
+			log.error("Error al enviar los emails {}", e.getMessage());
 			throw new RuntimeException();
 		}
 	}
