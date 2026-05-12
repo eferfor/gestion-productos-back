@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class SendEmailService {
+public class EnviarEmailService {
 
 	public void enviarEmailConAdjunto(String recipient, String subject, String body, Path attachment) {
 		log.info("Email imaginario enviado a " + recipient);

@@ -1,4 +1,4 @@
-package com.productos.catalogo;
+package com.productos.catalogo.pdf;
 
 import java.io.FileOutputStream;
 import java.util.Map;

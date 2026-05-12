@@ -1,4 +1,4 @@
-package com.productos.catalogo;
+package com.productos.catalogo.pdf;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

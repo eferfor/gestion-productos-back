@@ -19,15 +19,15 @@ import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import com.productos.catalogo.PdfEnvioResultado;
-import com.productos.catalogo.PdfGenerateService;
 import com.productos.catalogo.batch.UsuariosItemProcessor;
 import com.productos.catalogo.batch.UsuariosItemWriter;
+import com.productos.catalogo.pdf.PdfEnvioResultado;
+import com.productos.catalogo.pdf.PdfGenerateService;
 import com.productos.model.Email;
 import com.productos.model.Usuario;
 import com.productos.service.EmailService;
 import com.productos.service.ProductService;
-import com.productos.service.SendEmailService;
+import com.productos.service.EnviarEmailService;
 
 @Configuration
 @EnableJdbcJobRepository
@@ -43,7 +43,7 @@ public class CatalogoBatchConfig {
 	private EmailService emailService;
 	
 	@Autowired
-	private SendEmailService sendEmailService;
+	private EnviarEmailService sendEmailService;
 	
 	@Bean
 	UsuariosItemWriter catalogoItemWriter() {
@@ -79,7 +79,7 @@ public class CatalogoBatchConfig {
 	public Step enviarEmailsStep(JobRepository jobRepository,
 			PlatformTransactionManager transactionManager,
 			EmailService emailService,
-			SendEmailService sendEmailService) {
+			EnviarEmailService sendEmailService) {
 		return new StepBuilder("enviarEmailsStep", jobRepository)
 			.tasklet((contribution, chunkContext) -> {
 				int limit = 100;

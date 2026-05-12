@@ -4,7 +4,8 @@ import org.springframework.batch.infrastructure.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.productos.catalogo.PdfEnvioResultado;
+
+import com.productos.catalogo.pdf.PdfEnvioResultado;
 import com.productos.service.EmailService;
 
 import lombok.extern.slf4j.Slf4j;

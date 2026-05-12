@@ -1,4 +1,4 @@
-package com.productos.catalogo;
+package com.productos.catalogo.pdf;
 
 import java.util.HashMap;
 import java.util.List;

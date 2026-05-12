@@ -1,4 +1,4 @@
-package com.productos.catalogo;
+package com.productos.catalogo.pdf;
 
 public record PdfEnvioResultado (Long userId, String email, boolean emailValid, boolean ok, String rutaPdf, String error){
 

@@ -20,8 +20,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-import com.productos.catalogo.PdfEnvioResultado;
-import com.productos.catalogo.PdfGenerateService;
+import com.productos.catalogo.pdf.PdfEnvioResultado;
+import com.productos.catalogo.pdf.PdfGenerateService;
 import com.productos.dto.ProductDTO;
 import com.productos.model.Usuario;
 import com.productos.service.EmailService;
